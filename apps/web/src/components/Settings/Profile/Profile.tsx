@@ -36,6 +36,7 @@ import trimify from '@hey/lib/trimify';
 import {
   Button,
   Card,
+  Combobox,
   ErrorMessage,
   Form,
   Image,
@@ -403,7 +404,8 @@ const ProfileSettingsForm: FC = () => {
             type="text"
             {...form.register('name')}
           />
-          <Input
+          <Combobox
+            items={[]}
             label="Location"
             placeholder="Miami"
             type="text"

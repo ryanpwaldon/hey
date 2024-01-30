@@ -3,6 +3,7 @@ export { Badge } from './src/Badge';
 export { Button } from './src/Button';
 export { Card } from './src/Card';
 export { Checkbox } from './src/Checkbox';
+export { Combobox } from './src/Combobox';
 export { EmptyState } from './src/EmptyState';
 export { ErrorMessage } from './src/ErrorMessage';
 export { FieldError, Form, useZodForm } from './src/Form';
