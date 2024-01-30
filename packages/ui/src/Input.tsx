@@ -70,10 +70,10 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
               'peer w-full border-none bg-transparent outline-none focus:ring-0',
               className
             )}
-            id={id}
             ref={ref}
             type={type}
             {...props}
+            id={id}
           />
           <span
             className={cn({ 'order-first pl-3': iconLeft }, iconStyles)}
