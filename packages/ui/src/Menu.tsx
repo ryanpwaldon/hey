@@ -28,7 +28,7 @@ const MenuSubTrigger = forwardRef<
 >(({ children, className, inset, ...props }, ref) => (
   <MenuPrimitive.SubTrigger
     className={cn(
-      'focus:bg-accent data-[state=open]:bg-accent flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none',
+      'flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none focus:bg-gray-100 data-[state=open]:bg-gray-100 focus:dark:bg-gray-800',
       inset && 'pl-8',
       className
     )}
@@ -47,7 +47,7 @@ const MenuSubContent = forwardRef<
 >(({ className, ...props }, ref) => (
   <MenuPrimitive.SubContent
     className={cn(
-      'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 min-w-[8rem] overflow-hidden rounded-md border bg-white p-1 shadow-lg',
+      'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 min-w-[8rem] overflow-hidden rounded-md border bg-white p-1',
       className
     )}
     ref={ref}
@@ -63,7 +63,7 @@ const MenuContent = forwardRef<
   <MenuPrimitive.Portal>
     <MenuPrimitive.Content
       className={cn(
-        'z-50 min-w-[8rem] overflow-hidden rounded-md border bg-white p-1 shadow-md',
+        'z-50 min-w-[8rem] space-y-2 overflow-hidden rounded-xl border bg-white p-2 dark:border-gray-700 dark:bg-gray-900',
         'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
         className
       )}
@@ -84,7 +84,7 @@ const MenuItem = forwardRef<
 >(({ className, inset, ...props }, ref) => (
   <MenuPrimitive.Item
     className={cn(
-      'focus:bg-accent focus:text-accent-foreground relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
+      'relative flex cursor-pointer select-none items-center rounded-lg px-2 py-1.5 text-sm text-gray-700 outline-none transition-colors focus:bg-gray-100 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 dark:text-gray-200 focus:dark:bg-gray-800',
       inset && 'pl-8',
       className
     )}
@@ -101,7 +101,7 @@ const MenuCheckboxItem = forwardRef<
   <MenuPrimitive.CheckboxItem
     checked={checked}
     className={cn(
-      'focus:bg-accent focus:text-accent-foreground relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none transition-colors data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
+      'relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none transition-colors focus:bg-gray-100 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 focus:dark:bg-gray-800',
       className
     )}
     ref={ref}
@@ -123,7 +123,7 @@ const MenuRadioItem = forwardRef<
 >(({ children, className, ...props }, ref) => (
   <MenuPrimitive.RadioItem
     className={cn(
-      'focus:bg-accent focus:text-accent-foreground relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none transition-colors data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
+      'relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none transition-colors focus:bg-gray-100 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 focus:dark:bg-gray-800',
       className
     )}
     ref={ref}
