@@ -11,6 +11,7 @@ export { default as HelpTooltip } from './src/HelpTooltip';
 export { Image } from './src/Image';
 export { Input } from './src/Input';
 export { LightBox } from './src/LightBox';
+export { Menu } from './src/Menu';
 export { Modal } from './src/Modal';
 export { PageLoading } from './src/PageLoading';
 export { Radio } from './src/Radio';
