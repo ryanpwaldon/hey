@@ -1,7 +1,6 @@
 import type { ApolloCache } from '@hey/lens/apollo';
 import type { FC } from 'react';
 
-import { Menu } from '@headlessui/react';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
 import { PUBLICATION } from '@hey/data/tracking';
 import {
@@ -11,8 +10,7 @@ import {
   useUndoPublicationNotInterestedMutation
 } from '@hey/lens';
 import { isMirrorPublication } from '@hey/lib/publicationHelpers';
-import stopEventPropagation from '@hey/lib/stopEventPropagation';
-import cn from '@hey/ui/cn';
+import { Menu } from '@hey/ui';
 import errorToast from '@lib/errorToast';
 import { Leafwatch } from '@lib/leafwatch';
 import { toast } from 'react-hot-toast';
@@ -82,19 +80,7 @@ const NotInterested: FC<NotInterestedProps> = ({ publication }) => {
   };
 
   return (
-    <Menu.Item
-      as="div"
-      className={({ active }) =>
-        cn(
-          { 'dropdown-active': active },
-          'm-2 block cursor-pointer rounded-lg px-2 py-1.5 text-sm'
-        )
-      }
-      onClick={(event) => {
-        stopEventPropagation(event);
-        togglePublicationProfileNotInterested();
-      }}
-    >
+    <Menu.Item onClick={togglePublicationProfileNotInterested}>
       <div className="flex items-center space-x-2">
         {notInterested ? (
           <>

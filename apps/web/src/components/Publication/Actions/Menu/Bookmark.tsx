@@ -1,7 +1,6 @@
 import type { ApolloCache } from '@hey/lens/apollo';
 import type { FC } from 'react';
 
-import { Menu } from '@headlessui/react';
 import { BookmarkIcon as BookmarkIconOutline } from '@heroicons/react/24/outline';
 import { BookmarkIcon as BookmarkIconSolid } from '@heroicons/react/24/solid';
 import { PUBLICATION } from '@hey/data/tracking';
@@ -12,8 +11,7 @@ import {
   useRemovePublicationBookmarkMutation
 } from '@hey/lens';
 import { isMirrorPublication } from '@hey/lib/publicationHelpers';
-import stopEventPropagation from '@hey/lib/stopEventPropagation';
-import cn from '@hey/ui/cn';
+import { Menu } from '@hey/ui';
 import errorToast from '@lib/errorToast';
 import { Leafwatch } from '@lib/leafwatch';
 import { useRouter } from 'next/router';
@@ -110,19 +108,7 @@ const Bookmark: FC<BookmarkProps> = ({ publication }) => {
   };
 
   return (
-    <Menu.Item
-      as="div"
-      className={({ active }) =>
-        cn(
-          { 'dropdown-active': active },
-          'm-2 block cursor-pointer rounded-lg px-2 py-1.5 text-sm'
-        )
-      }
-      onClick={(event) => {
-        stopEventPropagation(event);
-        togglePublicationProfileBookmark();
-      }}
-    >
+    <Menu.Item onClick={togglePublicationProfileBookmark}>
       <div className="flex items-center space-x-2">
         {hasBookmarked ? (
           <>
