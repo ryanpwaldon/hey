@@ -1,4 +1,9 @@
-'use client';
+import type {
+  ComponentProps,
+  ComponentPropsWithoutRef,
+  ElementRef,
+  HTMLAttributes
+} from 'react';
 
 import * as MenuPrimitive from '@radix-ui/react-dropdown-menu';
 import {
@@ -6,13 +11,18 @@ import {
   ChevronRightIcon,
   DotFilledIcon
 } from '@radix-ui/react-icons';
-import * as React from 'react';
+import { forwardRef } from 'react';
 
 import cn from '../cn';
 
-const MenuSubTrigger = React.forwardRef<
-  React.ElementRef<typeof MenuPrimitive.SubTrigger>,
-  React.ComponentPropsWithoutRef<typeof MenuPrimitive.SubTrigger> & {
+const MenuRoot = (props: ComponentProps<typeof MenuPrimitive.Root>) => (
+  <MenuPrimitive.Root modal={false} {...props} />
+);
+MenuRoot.displayName = MenuPrimitive.Root.displayName;
+
+const MenuSubTrigger = forwardRef<
+  ElementRef<typeof MenuPrimitive.SubTrigger>,
+  ComponentPropsWithoutRef<typeof MenuPrimitive.SubTrigger> & {
     inset?: boolean;
   }
 >(({ children, className, inset, ...props }, ref) => (
@@ -31,13 +41,13 @@ const MenuSubTrigger = React.forwardRef<
 ));
 MenuSubTrigger.displayName = MenuPrimitive.SubTrigger.displayName;
 
-const MenuSubContent = React.forwardRef<
-  React.ElementRef<typeof MenuPrimitive.SubContent>,
-  React.ComponentPropsWithoutRef<typeof MenuPrimitive.SubContent>
+const MenuSubContent = forwardRef<
+  ElementRef<typeof MenuPrimitive.SubContent>,
+  ComponentPropsWithoutRef<typeof MenuPrimitive.SubContent>
 >(({ className, ...props }, ref) => (
   <MenuPrimitive.SubContent
     className={cn(
-      'bg-popover text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 min-w-[8rem] overflow-hidden rounded-md border p-1 shadow-lg',
+      'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 min-w-[8rem] overflow-hidden rounded-md border bg-white p-1 shadow-lg',
       className
     )}
     ref={ref}
@@ -46,17 +56,18 @@ const MenuSubContent = React.forwardRef<
 ));
 MenuSubContent.displayName = MenuPrimitive.SubContent.displayName;
 
-const MenuContent = React.forwardRef<
-  React.ElementRef<typeof MenuPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof MenuPrimitive.Content>
+const MenuContent = forwardRef<
+  ElementRef<typeof MenuPrimitive.Content>,
+  ComponentPropsWithoutRef<typeof MenuPrimitive.Content>
 >(({ className, sideOffset = 4, ...props }, ref) => (
   <MenuPrimitive.Portal>
     <MenuPrimitive.Content
       className={cn(
-        'bg-popover text-popover-foreground z-50 min-w-[8rem] overflow-hidden rounded-md border p-1 shadow-md',
+        'z-50 min-w-[8rem] overflow-hidden rounded-md border bg-white p-1 shadow-md',
         'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
         className
       )}
+      onCloseAutoFocus={(e) => e.preventDefault()}
       ref={ref}
       sideOffset={sideOffset}
       {...props}
@@ -65,9 +76,9 @@ const MenuContent = React.forwardRef<
 ));
 MenuContent.displayName = MenuPrimitive.Content.displayName;
 
-const MenuItem = React.forwardRef<
-  React.ElementRef<typeof MenuPrimitive.Item>,
-  React.ComponentPropsWithoutRef<typeof MenuPrimitive.Item> & {
+const MenuItem = forwardRef<
+  ElementRef<typeof MenuPrimitive.Item>,
+  ComponentPropsWithoutRef<typeof MenuPrimitive.Item> & {
     inset?: boolean;
   }
 >(({ className, inset, ...props }, ref) => (
@@ -83,9 +94,9 @@ const MenuItem = React.forwardRef<
 ));
 MenuItem.displayName = MenuPrimitive.Item.displayName;
 
-const MenuCheckboxItem = React.forwardRef<
-  React.ElementRef<typeof MenuPrimitive.CheckboxItem>,
-  React.ComponentPropsWithoutRef<typeof MenuPrimitive.CheckboxItem>
+const MenuCheckboxItem = forwardRef<
+  ElementRef<typeof MenuPrimitive.CheckboxItem>,
+  ComponentPropsWithoutRef<typeof MenuPrimitive.CheckboxItem>
 >(({ checked, children, className, ...props }, ref) => (
   <MenuPrimitive.CheckboxItem
     checked={checked}
@@ -106,9 +117,9 @@ const MenuCheckboxItem = React.forwardRef<
 ));
 MenuCheckboxItem.displayName = MenuPrimitive.CheckboxItem.displayName;
 
-const MenuRadioItem = React.forwardRef<
-  React.ElementRef<typeof MenuPrimitive.RadioItem>,
-  React.ComponentPropsWithoutRef<typeof MenuPrimitive.RadioItem>
+const MenuRadioItem = forwardRef<
+  ElementRef<typeof MenuPrimitive.RadioItem>,
+  ComponentPropsWithoutRef<typeof MenuPrimitive.RadioItem>
 >(({ children, className, ...props }, ref) => (
   <MenuPrimitive.RadioItem
     className={cn(
@@ -128,9 +139,9 @@ const MenuRadioItem = React.forwardRef<
 ));
 MenuRadioItem.displayName = MenuPrimitive.RadioItem.displayName;
 
-const MenuLabel = React.forwardRef<
-  React.ElementRef<typeof MenuPrimitive.Label>,
-  React.ComponentPropsWithoutRef<typeof MenuPrimitive.Label> & {
+const MenuLabel = forwardRef<
+  ElementRef<typeof MenuPrimitive.Label>,
+  ComponentPropsWithoutRef<typeof MenuPrimitive.Label> & {
     inset?: boolean;
   }
 >(({ className, inset, ...props }, ref) => (
@@ -146,9 +157,9 @@ const MenuLabel = React.forwardRef<
 ));
 MenuLabel.displayName = MenuPrimitive.Label.displayName;
 
-const MenuSeparator = React.forwardRef<
-  React.ElementRef<typeof MenuPrimitive.Separator>,
-  React.ComponentPropsWithoutRef<typeof MenuPrimitive.Separator>
+const MenuSeparator = forwardRef<
+  ElementRef<typeof MenuPrimitive.Separator>,
+  ComponentPropsWithoutRef<typeof MenuPrimitive.Separator>
 >(({ className, ...props }, ref) => (
   <MenuPrimitive.Separator
     className={cn('bg-muted -mx-1 my-1 h-px', className)}
@@ -161,7 +172,7 @@ MenuSeparator.displayName = MenuPrimitive.Separator.displayName;
 const MenuShortcut = ({
   className,
   ...props
-}: React.HTMLAttributes<HTMLSpanElement>) => {
+}: HTMLAttributes<HTMLSpanElement>) => {
   return (
     <span
       className={cn('ml-auto text-xs tracking-widest opacity-60', className)}
@@ -180,7 +191,7 @@ export const Menu = {
   Portal: MenuPrimitive.Portal,
   RadioGroup: MenuPrimitive.RadioGroup,
   RadioItem: MenuRadioItem,
-  Root: MenuPrimitive.Root,
+  Root: MenuRoot,
   Separator: MenuSeparator,
   Shortcut: MenuShortcut,
   Sub: MenuPrimitive.Sub,
