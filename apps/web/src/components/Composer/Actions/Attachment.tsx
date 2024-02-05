@@ -91,7 +91,7 @@ const Attachment: FC = () => {
   return (
     <div>
       <Menu.Root open={showMenu}>
-        <Menu.Trigger>
+        <Menu.Trigger asChild>
           <motion.button
             aria-label="More"
             className="outline-brand-500 rounded-full outline-offset-8"

@@ -1,7 +1,5 @@
 import type { FC, ReactNode } from 'react';
 
-import MenuTransition from '@components/Shared/MenuTransition';
-import { Menu } from '@headlessui/react';
 import {
   GlobeAltIcon,
   UserGroupIcon,
@@ -10,8 +8,7 @@ import {
 } from '@heroicons/react/24/outline';
 import { CheckCircleIcon } from '@heroicons/react/24/solid';
 import { ReferenceModuleType } from '@hey/lens';
-import { Tooltip } from '@hey/ui';
-import cn from '@hey/ui/cn';
+import { Menu, Tooltip } from '@hey/ui';
 import { motion } from 'framer-motion';
 import { useReferenceModuleStore } from 'src/store/non-persisted/useReferenceModuleStore';
 
@@ -59,18 +56,16 @@ const ReferenceSettings: FC = () => {
   }
 
   const Module: FC<ModuleProps> = ({ icon, onClick, selected, title }) => (
-    <Menu.Item
-      as="a"
-      className={cn({ 'dropdown-active': selected }, 'menu-item')}
-      onClick={onClick}
-    >
-      <div className="flex items-center justify-between space-x-2">
-        <div className="flex items-center space-x-1.5">
-          <div className="text-brand-500">{icon}</div>
-          <div>{title}</div>
+    <Menu.Item asChild onClick={onClick}>
+      <a>
+        <div className="flex items-center justify-between space-x-2">
+          <div className="flex items-center space-x-1.5">
+            <div className="text-brand-500">{icon}</div>
+            <div>{title}</div>
+          </div>
+          {selected ? <CheckCircleIcon className="w-5 text-green-500" /> : null}
         </div>
-        {selected ? <CheckCircleIcon className="w-5 text-green-500" /> : null}
-      </div>
+      </a>
     </Menu.Item>
   );
 
@@ -91,29 +86,31 @@ const ReferenceSettings: FC = () => {
   };
 
   return (
-    <Menu as="div">
-      <Tooltip
-        content={getSelectedReferenceModuleTooltipText()}
-        placement="top"
-      >
-        <Menu.Button
-          as={motion.button}
-          className="outline-brand-500 rounded-full outline-offset-8"
-          whileTap={{ scale: 0.9 }}
+    <div>
+      <Menu.Root>
+        <Tooltip
+          content={getSelectedReferenceModuleTooltipText()}
+          placement="top"
         >
-          <div className="text-brand-500">
-            {isEveryone ? <GlobeAltIcon className="w-5" /> : null}
-            {isMyFollowers ? <UsersIcon className="w-5" /> : null}
-            {isMyFollows ? <UserPlusIcon className="w-5" /> : null}
-            {isFriendsOfFriends ? <UserGroupIcon className="w-5" /> : null}
-          </div>
-        </Menu.Button>
-      </Tooltip>
-      <MenuTransition>
-        <Menu.Items
-          className="absolute z-[5] mt-2 rounded-xl border bg-white py-1 shadow-sm focus:outline-none dark:border-gray-700 dark:bg-gray-900"
-          static
-        >
+          <Menu.Trigger asChild>
+            <div>
+              <motion.button
+                className="outline-brand-500 rounded-full outline-offset-8"
+                whileTap={{ scale: 0.9 }}
+              >
+                <div className="text-brand-500">
+                  {isEveryone ? <GlobeAltIcon className="w-5" /> : null}
+                  {isMyFollowers ? <UsersIcon className="w-5" /> : null}
+                  {isMyFollows ? <UserPlusIcon className="w-5" /> : null}
+                  {isFriendsOfFriends ? (
+                    <UserGroupIcon className="w-5" />
+                  ) : null}
+                </div>
+              </motion.button>
+            </div>
+          </Menu.Trigger>
+        </Tooltip>
+        <Menu.Content>
           <Module
             icon={<GlobeAltIcon className="size-4" />}
             onClick={() => {
@@ -158,9 +155,9 @@ const ReferenceSettings: FC = () => {
             selected={isFriendsOfFriends}
             title={FRIENDS_OF_FRIENDS}
           />
-        </Menu.Items>
-      </MenuTransition>
-    </Menu>
+        </Menu.Content>
+      </Menu.Root>
+    </div>
   );
 };
 
